@@ -4,12 +4,14 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/your-repo/my-node-app.git'
+                // Replace with your actual Git repository URL
+                git 'https://github.com/your-username/my-node-app.git'
             }
         }
         stage('Build Docker Image') {
             steps {
                 script {
+                    // Ensure the image name is what you desire
                     dockerImage = docker.build("my-node-app")
                 }
             }
@@ -25,10 +27,12 @@ pipeline {
         }
         stage('Deploy to AWS') {
             steps {
-                sshagent(['your-ssh-credentials-id']) {
+                // Use your actual SSH credentials ID in Jenkins
+                sshagent(['my-ssh-key']) {
                     sh '''
-                    docker save my-node-app | bzip2 | ssh -o StrictHostKeyChecking=no ubuntu@your-nodejs-ec2-public-dns 'bunzip2 | docker load'
-                    ssh -o StrictHostKeyChecking=no ubuntu@your-nodejs-ec2-public-dns 'docker run -d -p 80:3000 my-node-app'
+                    // Use your actual EC2 instance details
+                    docker save my-node-app | bzip2 | ssh -o StrictHostKeyChecking=no ubuntu@3.255.91.168 'bunzip2 | docker load'
+                    ssh -o StrictHostKeyChecking=no ubuntu@3.255.91.168 'docker run -d -p 80:3000 my-node-app'
                     '''
                 }
             }
