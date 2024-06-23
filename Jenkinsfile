@@ -23,6 +23,7 @@ pipeline {
             steps {
                 script {
                     dockerImage.inside {
+                        sh 'npm install'
                         sh 'npm test'
                     }
                 }
@@ -31,7 +32,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', env.DOCKER_HUB_CREDENTIALS) {
+                    docker.withRegistry('https://index.docker.io/v1/', env.DOCEKR_HUB_CREDENTIALS) {
                         dockerImage.push()
                         dockerImage.push('latest')
                     }
