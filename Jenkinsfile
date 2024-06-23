@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git url: 'https://github.com/GLcoz/my-node-app.git', credentialsId: 'github-token'  // Replace with your GitHub credentials ID
+                git branch: 'main', url: 'https://github.com/GLcoz/my-node-app.git', credentialsId: 'github-token'  // Replace with your GitHub credentials ID
             }
         }
         stage('Build Docker Image') {
